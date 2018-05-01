@@ -1,19 +1,21 @@
 package JewelsAndStones;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 public class JewelsAndStones {
 
     static int numJewelsInStones(String J, String S) {
+        if (J.length() == 0 || S.length() == 0)
+            return 0;
 
-        Set<Character> jewels = J.chars().mapToObj(e -> (char) e).collect(Collectors.toSet());
+        boolean[] dictionary = new boolean[78];
 
-        char[] stones = S.toCharArray();
+        for (char c : J.toCharArray()) {
+            dictionary[c - '0'] = true;
+        }
+
         int result = 0;
 
-        for (char c : stones) {
-            if (jewels.contains(c)) result++;
+        for (char c : S.toCharArray()) {
+            if (dictionary[c - '0']) result++;
         }
 
         return result;
